@@ -11,5 +11,6 @@ int c=sc.nextInt();
 System.out.print("left shift = "+left+" Right = "+right);
 int xor=b^c;
 System.out.print(" Xor = "+xor);
+sc.close();
 }
 }

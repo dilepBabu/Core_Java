@@ -25,5 +25,6 @@ if((a>0)&&(b>0))
 {
 System.out.print("Both number is positive");
 }
+sc.close();
 }
 }
