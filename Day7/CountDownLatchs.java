@@ -15,16 +15,28 @@ class ProcesserCount implements Runnable
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+
         }
+        latch.countDown();
     }}
-public class CountDownLatch  {
+public class CountDownLatchs {
 
 
 
     public static void main(String args[])
     {
         CountDownLatch latch=new CountDownLatch(3);
-        ExecutorService executorService= Executors.newFixedThreadPool(3)
+        ExecutorService executorService= Executors.newFixedThreadPool(3);
+        for (int i = 0; i < 3; i++) {
+            executorService.submit(new ProcesserCount(latch));
+        }
+        executorService.shutdown();
+        try {
+            latch.await();
+        } catch (InterruptedException e) {
+
+        }
+
+        System.out.println("completed");
     }
 }
