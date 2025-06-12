@@ -1,5 +1,5 @@
-package Day7;
 
+package Day7.Exercises;
 import java.util.Arrays;
 
 public class DistinctNumber {

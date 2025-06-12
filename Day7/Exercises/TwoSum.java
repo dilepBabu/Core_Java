@@ -1,10 +1,10 @@
-package Day6.Exercise;
+package Day7.Exercises;
 
-public class arrayadd {
+public class TwoSum {
     public static void main(String args[])
     {
-        int a[]={1,3,2,4,5};
-        int target=3;
+        int a[]={2,7,11,15};
+        int target=9;
         for (int i = 0; i < a.length; i++) {
             for (int j = i+1; j <a.length ; j++) {
                 if(a[i]+a[j]==target) {
