@@ -1,0 +1,58 @@
+package SerializeandDeserialize;
+
+import java.io.*;
+
+public class SerializeDeserialize {
+    public static void main(String[] args) {
+
+        SerializeDeserialize sd=new SerializeDeserialize();
+        sd.seral();
+        sd.deseral();
+
+    }
+
+    private void deseral() {
+        ObjectInputStream objectinputStream1=null;
+        try
+        {
+            objectinputStream1=new ObjectInputStream(new FileInputStream("C:\\Users\\dilep\\Desktop\\javaaaa\\core\\Day11\\\\src\\SerializeandDeserialize\\Createdfile.txt\\"));
+            Example de=(Example)objectinputStream1.readObject();
+            System.out.println(de.getName()+" "+de.getNumber());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        finally {
+            try
+            {
+                if(objectinputStream1!=null)
+                {
+                    objectinputStream1.close();
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    public void seral() {
+        ObjectOutputStream objectOutputStream=null;
+        try
+        {
+            Example example=new Example(21,"dilep");
+            objectOutputStream=new ObjectOutputStream(new FileOutputStream("C:\\Users\\dilep\\Desktop\\javaaaa\\core\\Day11\\src\\SerializeandDeserialize\\Createdfile.txt"));
+            objectOutputStream.writeObject(example);
+            System.out.println("created");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }finally {
+            try{
+            if(objectOutputStream!=null)
+            {
+                objectOutputStream.close();
+            }} catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+    }
+}
