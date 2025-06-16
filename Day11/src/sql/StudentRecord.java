@@ -53,6 +53,7 @@ public class StudentRecord {
             }
         }
     }
+
     public static void select()
     {
         Statement smt=null;
@@ -87,8 +88,47 @@ public class StudentRecord {
             }
         }
     }
+    public static void prepared()
+    {
+        PreparedStatement smt=null;
+        Connection con=null;
+        ResultSet rs=null;
+        try{
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            con= DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databasename=student;encrypt=true;trustServerCertificate=true","sa","dilepBABU@11");
+            DatabaseMetaData databaseMetaData=con.getMetaData();
+            System.out.println(databaseMetaData.getDatabaseProductName());
+            System.out.println(databaseMetaData.getDatabaseProductVersion());
+            smt=con.prepareStatement("select * from Details where id=? and Department=?");
+            smt.setInt(1,1);
+            smt.setString(2,"IT");
+            rs=smt.executeQuery();
+            while (rs.next())
+            {
+                System.out.println(rs.getInt("id"));
+                System.out.println(rs.getString("name"));
+                System.out.println(rs.getInt("age"));
+                System.out.println(rs.getString("Department"));
+            }
+
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        finally {
+            try
+            {
+                if(rs!=null) rs.close();
+                if(smt!=null) smt.close();
+                if(con!=null) con.close();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
 
     public static void main(String[] args) {
-       select();
+//       select();
+       prepared();
     }
 }
